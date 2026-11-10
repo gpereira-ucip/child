@@ -1,0 +1,120 @@
+# Child: documento maestro del proyecto (fuente única)
+
+Actualizado: 10 nov 2026 · Versión de la app: 0.16 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
+
+> Cualquier sesión que trabaje en Child debe leer este archivo primero y actualizarlo al terminar. Las sesiones de Claude no comparten memoria: este documento es la memoria.
+
+## 1. Qué es Child
+App de acompañamiento para familias: gestación, controles y hitos, crecimiento, registro diario, cuidados y señales de alarma. Un solo HTML sin conexión (PWA), para luego pasar a apps nativas. Español rioplatense (voseo).
+No es la app PICU Pocket / Arucip (ese es otro proyecto, para profesionales de terapia intensiva, repo gpereira-ucip/picu-pocket). Child comparte con ella solo el espíritu del cartel amarillo.
+
+## 2. Decisiones de marca (cerradas por el usuario)
+- **Fondo blanco siempre.** Sin modo oscuro. Sin cuadros ni fondos de color alrededor del logo.
+- **Logo:** el cartel amarillo de niño con CHILD en crayones, de la captura que subió el usuario. No modificarlo. Se usa recortado de la captura (sin recolorear). Ícono de app: el logo completo centrado sobre blanco.
+- **Eslogan en la app:** «Care, together.» y debajo «Acompañando a cuidar». Alternativas ofrecidas: Grow with care · Caring, step by step · Care that grows · Always caring · Caring, every day.
+- **Paleta:** amarillo cartel #F0AB0C (acción principal), tinta #16140F, y los colores de los crayones: azul #2E86C9, rojo #D8373B (reservado para alertas), violeta #8E4BB8, verde #4E9E3C, naranja #EF8A1E. Franja de los cinco colores bajo el encabezado.
+- **Rombo de cartel** como elemento gráfico repetido (semanas, edades, partes del libro).
+- **Poco texto en lo inicial**; el detalle va plegado.
+- Perfiles inclusivos: «Estamos esperando» / «Ya está con nosotros». No preguntar cómo llegó el niño; la fecha de nacimiento puede ser aproximada; la sección Embarazo es de consulta general. Tabla de curvas «niñas/niños» sin suponer nada.
+
+## 3. Estado de la app (v0.16)
+
+- v0.16 Registro > Rutina (`regT="rut"`, `vRut`, `rutText`, campo `rut` por niño en `CK`): pasos propios de la familia en mañana, tarde y noche, con tilde que vale solo por el día (`d` = fecha de hoy) y copiar como texto. Sin contenido clínico, sin horarios ni edades esperadas. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar.
+- v0.15 Registro > Turnos (`regT="tur"`, `vTur`, `turText`, campo `tur` por niño en `CK`, objeto {0..6: texto} con 0 = lunes): quién cuida cada día de la semana, muestra a quién le toca hoy y copia la semana. Sin contenido clínico; no avisa ni se comparte en tiempo real. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar.
+- v0.14 Resumen para la consulta: `resumen()` envuelve a `resumenBase()` y agrega, si los hay, los recuerdos del Álbum de los últimos 30 días (fecha, título, edad, nota) antes de la línea final. Solo lo que escribió la familia; sin contenido clínico. Probada en Chromium 390x844 sin errores de consola ni desborde; con y sin recuerdos.
+
+- v0.13 Registro > Hogar (`regT="hog"`, `vHog`, `hogL`, campo `hog` por niño en `CK`): dos listas simples, Compras y Tareas (ítem, quién se encarga en Tareas, tildar, quitar, «Quitar los hechos», copiar como texto con [ ]/[x]). Sin contenido clínico; no comparte en tiempo real. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar.
+- v0.12 Registro > Gastos (`regT="gas"`, `vGas`, campo `gas` por niño en `CK`): gastos de salud con tipo (consulta, estudio, medicamento, vacuna, otro), monto, fecha y nota; total del mes y total general; copiar la lista. Sin contenido clínico; no mezcla monedas.
+- v0.1 prototipo: comer, pantallas, sueño, crianza, alertas.
+- v0.2 rediseño blanco + Embarazo semana a semana (1 a 42, con ilustración esquemática) + Hitos 2 meses a 5 años.
+- v0.3 Registro (fiebre, medicación, comida, sueño, notas, gráfico 72 h, resumen para consulta), ficha de emergencia, botón SOS, código de bloqueo (no cifra), copia de seguridad, país.
+- v0.4 varios hijos; curvas de crecimiento OMS 0 a 5 años con tablas LMS oficiales (repositorio WorldHealthOrganization/anthro, archivos data-raw/growthstandards/*.txt) y edad corregida.
+- v0.5 Guía con el índice del libro (5 partes, 63 capítulos, buscador, estado por capítulo); rediseño visual.
+- v0.6 calculadora de fecha probable de parto (Naegele + ecografía por CRL + redatación ACOG), cronología prenatal (cap. 4), alertas del embarazo y posparto (cap. 5).
+
+- v0.11 Guía: se cargaron tres capítulos entregados por el autor, en una sección «Capítulos entregados por el autor» dentro de la Guía (arreglo `DOCS`, vista `vDoc`, no reemplazan filas de `CH`): cap. 1 «Gestación, recién nacido y 0 a 2 años», cap. 2 «Preescolar y escolar: 2 a 12 años», cap. 3 «Adolescencia: 12 a 18 años». Texto fiel al entregado (solo se pasó el formato; las negritas se conservan). Etiqueta «Texto del autor · revisión médica pendiente». Las figuras (FIG. 1 [19], FIGURE 2 [19], Figure 4 [20], Figura 2 [13]) y la calculadora HEADS-ED no venían en el texto: quedan como avisos «pendiente». Las referencias [n] no tienen bibliografía cargada. Se agregó una «Nota de la app» junto a cada esquema de vacunación aclarando que es el de EE. UU. (ACIP).
+- v0.10 empieza las primeras 50 sugerencias (sección 7 quater). Embarazo > Herramientas (`embT="herr"`, `embTool`): movimientos del bebé (`mov`), síntomas (`sint`), peso y presión (`pp`), contracciones (`cont`) y plan de parto (`plan`). Registro > Lactancia: cronómetro de tomas que guarda en `log` como comida «Pecho» con lado y minutos. La app solo registra: no interpreta valores ni da umbrales.
+- v0.9 (pedido del usuario del 6 nov): reestructura. Barra inferior: Inicio, Desarrollo, Crianza, Historial, Preguntas. Se quitaron el botón SOS del encabezado y la sección Alertas (los capítulos de la Guía se conservan). Registro y Guía se abren desde Inicio.
+  - Desarrollo (`des`): con embarazo = Embarazo semana a semana (fecha de parto y bolso); con niño = Hitos 0 a 5 años, Etapas 6 a 18 años (borrador cualitativo, sin números) y Embarazo de consulta.
+  - Crianza (`crian`): recomendaciones por edad según la fecha cargada en Inicio (siete etapas, de la espera a 12 años o más), borrador sin números; desde ahí se llega a Comer, Pantallas, Sueño y Preguntas para pensar.
+  - Historial (`hist`, campo `hist` por niño): entradas con tipo, fecha, título, lugar y detalle largo; se puede pegar texto o cargar un .txt/.csv/.json/.md (máx. 200 KB); copiar todo o bajar como .txt.
+  - Preguntas (`preg`, campo `qs` por niño; contacto global `qto` y `qct`): el usuario escribe una pregunta y la manda por WhatsApp o correo (o copia/comparte); luego carga la respuesta a mano. No hay servidor: nada llega solo.
+- v0.8 «Álbum de primeras veces» en Registro (tercera pestaña): recuerdo con título (ideas sugeridas o texto propio), fecha, nota y edad ese día; campo `alb` por niño (en `CK`, entra en la copia de seguridad). Sin contenido clínico ni edades esperadas. Solo texto, sin fotos.
+- v0.8 «Bolso de maternidad» en Embarazo (pestaña «Bolso»): lista propia para tildar, agregar y quitar; botón «Ver ideas» carga 9 ítems generales no clínicos (documento, carnet del embarazo, ropa, higiene, pañales, silla de auto, cargador). Marcada «Borrador / Revisión médica: pendiente». Campo `bag` por niño.
+- v0.8 «Agenda» en Registro (cuarta pestaña): citas con tipo, con quién, fecha y hora, lugar; próximas y pasadas; «Al calendario» baja un archivo .ics. Campo `ag`. No avisa sola. Y tipo «Pañal» (pis, caca, ambos) en el registro diario.
+- v0.7 borradores propios de los capítulos 6, 7, 8, 9, 10, 12, 14 (algoritmo de tamizaje) y 21, marcados «Borrador» y «Pendiente de revisión médica»; «Próximo control» en Inicio (periodicidad de Bright Futures).
+
+Capítulos con contenido en la app: 1, 2, 4, 15, 22 (completos); 5, 13, 17, 18, 39, 61, 62 (resumen); 6, 7, 8, 9, 10, 12, 14, 21 (borrador). Los otros 48 están «Próximamente». Si el usuario entrega el texto de un capítulo en borrador, reemplaza al borrador.
+
+## 4. Estructura técnica
+- Código fuente: `src/index.src.html` (cumulativo, con marcadores `__LOGO__`, `__ICON*__`). Se compila con `python3 build.py` (inserta el logo y los íconos en base64 y escribe `index.html`).
+- Un solo IIFE de JavaScript, sin librerías. Funciones declaradas con hoisting: las versiones nuevas redefinen o envuelven funciones previas (p. ej. `vReg` (redefinida en v0.8 con la pestaña Álbum) envuelve `vRegDia`; `vAlertas` envuelve `vAlertasKid`; `vEmb` envuelve `vEmbSem`; `tabsList`).
+- Datos en `localStorage`, clave `child-v1`. Campos por niño en `CK` (mode, name, dob, fum, notes, screen, habits, hitos, ficha, log, sex, ga, gr, alb, bag, ag, hist, qs, mov, sint, pp, cont, plan…). Perfiles inactivos en `S.kids`, orden en `S.order`, activo en `S.cur`. Globales: emerg, ped, tox, pin, country.
+- Guía: arreglo `CH` (63 filas: n, parte, título, fuentes del índice, visuales, enlace, estado) y objeto `BODY[n]` con bloques `{h,p,ul,ol,call:"alarma|clave|info",table,viz}`. Para cargar un capítulo basta definir `BODY[n]` y poner el estado.
+- Service worker `sw.js` (caché `child-v0.1`, solo en http/https). El manifest se genera dentro del HTML.
+- Pruebas: Playwright Chromium a 390×844; sin errores de consola, sin desborde horizontal. Esperar ~900 ms antes de capturas (animaciones de entrada).
+
+## 5. Reglas de trabajo
+- No inventar contenido clínico ni números. Todo dato clínico lleva fuente y la etiqueta «Revisión médica: pendiente» hasta que el usuario o su revisor lo confirme (hay `REVIEW` en el código para poner nombre y fecha).
+- No agregar calculadora de dosis ni diagnóstico. El registro anota lo que se dio, sin sugerir.
+- Datos de curvas solo desde tablas oficiales. Percentiles verificados con casos conocidos.
+- No tocar el logo. Fondo blanco.
+- Cada entrega: probar, mirar capturas, enviar el HTML (un solo archivo) y resumir qué cambió, qué hay que revisar y qué sigue.
+- No mezclar con PICU Pocket / Arucip.
+
+## 6. Índice del libro (63 capítulos)
+Parte I Gestación (1 a 10) · Parte II Niño sano (11 a 28) · Parte III Enfermedades prevalentes (29 a 45) · Parte IV Condiciones y síndromes (46 a 59) · Parte V Recursos para la familia (60 a 63). El detalle, con fuentes y visuales previstos ([1] a [15]), está en el arreglo `CH` del código y en la pestaña Guía. Las próximas entregas del usuario desarrollan cada capítulo; se cargan en `BODY[n]`.
+
+## 7. Hoja de ruta: las 200 sugerencias (entregadas en 4 tandas)
+Hecho = ✔, parcial = ◐.
+
+**Tanda 1 (30).** Embarazo: calendario de controles ◐, contador de movimientos fetales, registro de síntomas, bolso de maternidad ◐ (v0.8) y plan de parto, señales de alarma ✔. Salud: curvas de crecimiento ✔, calendario de vacunación, registro de fiebre y medicación ✔, libreta sanitaria ✔, tarjeta de emergencia ✔, edad corregida ✔, controles periódicos. Rutinas: registro de tomas y pañales ◐, alimentación complementaria ◐, recetas, registro de sueño ✔, destete y esfínteres. Desarrollo: actividades diarias, álbum de primeras veces ◐ (v0.8, solo texto), diario del bebé, lenguaje, tamizaje validado. Seguridad: seguridad en casa, primeros auxilios y RCP, salud mental del cuidador, crianza compartida, guía para consultas ◐. Producto: notificaciones, varios hijos ✔, exportar y respaldar ✔.
+
+**Tanda 2 (50).** Preconcepción (3): ventana fértil, lista preconcepcional, registro del ciclo. Embarazo avanzado y parto (7): contracciones, etapas del parto, preparación, cuidados por trimestre, plan de lactancia, alimentos y medicamentos, peso y presión. Posparto (6): escala EPDS, recuperación, lactancia, cronómetro de lactancia, salud de la pareja, anticoncepción. Recién nacido (5): primeras semanas, ictericia, cordón y baño, cólicos, tamizaje neonatal. Salud (8): asistente de síntomas, dosis de antitérmicos, hidratación, enfermedades frecuentes, alergias, salud bucal, visión y audición, obesidad y bajo peso. Desarrollo (7): plan de juego, lenguaje y bilingüismo, miedos, ingreso a jardín, aprendizaje, señales de TEA y TDAH, pantallas en familia. Crianza (6): disciplina positiva, berrinches, hermanos, tipos de familia, duelo y separación, cuidado del cuidador. Seguridad (5): retiro de productos, silla de auto, estaciones, intoxicaciones, viajes. Producto (3): compartir con el pediatra, contenido avalado y fechado, bajo consumo e idiomas.
+
+**Tanda 3 (20).** Confianza clínica: comité visible ◐, bibliografía por dato ◐, versiones del contenido, adaptación por país ◐. Uso: modo crisis ✔, búsqueda en lenguaje cotidiano, una mano y voz, accesibilidad real, onboarding corto. Privacidad: privacidad como diferencial ◐, bloqueo ✔, copia cifrada, consentimiento al compartir. Tecnología: app nativa y widgets, sin conexión ✔, pruebas de reglas clínicas, rendimiento. Marca: sistema de diseño ◐, tono de voz, medición con familias.
+
+**Tanda 4 (100).** A. Inteligencia (10): resumen semanal, detector de cambios, línea de tiempo cruzada ◐, FAQ adaptadas, asistente que cita fuentes, explicador de informes, cómo se lo explico a mi hijo, recomendaciones con motivo, hito con contexto, resumen para el médico ✔. B. Embarazo (10): tamaño real 1:1, visor 3D, nombres, registro de la barriga, cartas al bebé, mapa de maternidades, guía para la pareja, gestación múltiple y riesgo, duelo gestacional, preparación de la casa. C. Bebé (10): ventana de sueño, ruido blanco, detector de llanto, leche extraída, lactancia por pecho, cuidado nocturno compartido, alérgenos con calendario, mapa de pañales, BLW, destete. D. Desarrollo (10): juegos con el celular, canciones y cuentos, mapa del desarrollo, dibujos, primeras palabras, rutinas visuales, lengua materna, juego con materiales de la casa, seguimiento escolar, educación emocional. E. Clínica (10): trayectoria de percentiles ◐, medir perímetro cefálico, registro de episodios, plan de acción para crónicos, prematuros, pasaporte de salud, medicación crónica, controles odontológicos y oftalmológicos, alertas de brotes, informe de alta. F. Familia (10): modo niñera ◐, mensajes entre cuidadores, custodia compartida, línea de tiempo familiar, tareas de crianza, guía para abuelos, red de apoyo, familias no tradicionales, madres y padres adolescentes, idioma por usuario. G. Datos (10): importar libreta escaneada, FHIR, portal profesional, teleconsulta, QR de emergencia, CSV y PDF, investigación voluntaria, dispositivos conectados, registro de consultas, línea de tiempo de salud completa. H. Seguridad (10): guardias abiertas ahora, SOS con ubicación, simulacros de RCP, seguridad por habitación, objetos peligrosos, alerta de calor en el auto, tarjeta escolar, plan de desastres, seguridad digital, prevención de maltrato. I. Bienestar (10): check-in emocional, meditaciones, logros del cuidador, grupos moderados, preguntas a especialistas, encuentros locales, historias validadas, duelo, crisis de ansiedad parental, día libre. J. Equidad y calidad (10): bajo recurso, lenguas originarias, versión en audio, derechos y trámites, recursos gratuitos, convenios con hospitales, panel de impacto, certificación externa, mejora continua, modelo ético sin publicidad.
+
+## 7 bis. Tareas programadas (orden del 6 nov 2026)
+- **Child:** una sola tarea, «Child: avance diario». Cada corrida es una sesión nueva: lee este documento en el artifact, avanza un paso acotado, prueba, republica el artifact y envía el HTML.
+- **Arucip:** una sola tarea, «Arucip: avance diario» (a las 7:40 y a las 21:40, hora de Argentina; repositorio gpereira-ucip/picu-pocket, solo la rama ccr-3af3e921-vfklyp; activa hasta el 12 de noviembre de 2026). Reúne lo pedido en las tareas anteriores de Arucip, que quedaron desactivadas, no borradas.
+- **PICU Pocket:** inactiva (tarea desactivada). No se toca el repositorio ni su rama principal: es el respaldo.
+- Estado verificado el 6 nov 2026 (la primera corrida de «Child: avance diario» produjo la v0.8 y funcionó): activas solo «Arucip: avance diario» y «Child: avance diario» (9:20, hora de Argentina).
+- No mezclar Child con Arucip ni con PICU Pocket.
+
+## 7 quater. Las primeras 50 sugerencias: estado (v0.10)
+Son la tanda 1 (30) y las primeras 20 de la tanda 2, en el orden de la sección 7. ✔ hecho · ◐ parcial · ✖ reemplazado por decisión del usuario · ⏳ depende de contenido o fuente que falta.
+- **Tanda 1.** Calendario de controles ◐ (Próximo control por edad). Contador de movimientos ✔. Registro de síntomas ✔. Bolso y plan de parto ✔. Señales de alarma ✖ (el usuario pidió sacar Alertas y SOS). Curvas ✔ (0 a 5 años). Calendario de vacunación ⏳: la página oficial (argentina.gob.ar) no se pudo abrir desde la sesión porque ese dominio no está permitido en la red del entorno; no se cargó de memoria. Fiebre y medicación ✔. Libreta ✔. Tarjeta de emergencia ◐ (Ficha en Perfil). Edad corregida ✔. Controles periódicos ◐. Tomas y pañales ✔ (cronómetro y pañal). Alimentación complementaria ◐ (Comer por edad). Recetas ⏳ (texto). Sueño ✔. Destete y esfínteres ⏳ (texto). Actividades diarias ⏳ (texto). Álbum ✔ (solo texto). Diario del bebé ◐ (notas del álbum). Lenguaje ⏳. Tamizaje validado ◐ (algoritmo; el instrumento validado necesita licencia). Seguridad en casa ◐. Primeros auxilios y RCP ⏳ (texto revisado). Salud mental del cuidador ⏳ (texto). Crianza compartida ◐ (Preguntas y Agenda). Guía para consultas ✔ (Resumen para la consulta e Historial). Notificaciones ⏳ (versión nativa). Varios hijos ✔. Exportar ✔.
+- **Tanda 2, primeras 20.** Ventana fértil ⏳ y registro del ciclo ⏳ (llevan números clínicos). Lista preconcepcional ⏳ (texto). Contracciones ✔ (solo registra). Etapas del parto ⏳ (texto). Preparación al parto ◐ (plan de parto). Cuidados por trimestre ⏳. Plan de lactancia ◐ (cronómetro). Alimentos y medicamentos en el embarazo ⏳ (texto revisado). Peso y presión ✔ (sin interpretar). Escala EPDS ⏳ (instrumento con licencia). Recuperación posparto ⏳. Lactancia ◐. Cronómetro ✔. Salud de la pareja ⏳. Anticoncepción ⏳. Primeras semanas ⏳, ictericia ⏳, cordón y baño ⏳, cólicos ⏳ (todos son contenido clínico que debe venir del usuario o de fuente oficial).
+- Resumen: 16 hechos del todo (✔) de las 50, contando los de versiones anteriores; el resto necesita texto del usuario, una fuente oficial o una versión nativa.
+
+## 7 ter. Comparación con otras apps (6 nov 2026)
+Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se puede replicar en un HTML sin conexión se hace; lo demás queda anotado.
+- **Crianza: Guía para Padres (CAECE/ETCI), Crianza+ (UNICEF):** información con evidencia. Child lo cubre con la Guía de 63 capítulos; falta cargar el contenido (depende del usuario).
+- **Glow Baby / Baby Tracker:** tomas, sueño, pañales, hitos, medicación, artículos. Child tiene comida (pecho/biberón), sueño, medicación, hitos; v0.8 sumó pañales. Falta: cronómetro de lactancia con lado, y un panel de resumen del día.
+- **Cozi / FamilyWall:** agenda compartida, tareas, compras, gastos. v0.8 sumó Agenda con .ics. Falta: tareas de crianza y lista de compras; lo compartido en tiempo real no se puede sin servidor.
+- **Divermind:** rutinas con pictogramas y acceso rápido para quien cuida. Falta: rutinas visuales (candidato) y «modo niñera» completo (hoy parcial: ficha de emergencia y resumen).
+- **OurFamilyWizard / TalkingParents:** custodia compartida, gastos, mensajes inalterables. No replicable sin servidor; sí candidato: registro de gastos médicos y calendario de custodia.
+- **Family Link, Qustodio, Kaspersky Safe Kids, Find My Kids:** control parental, GPS, bloqueo de apps. Exigen funciones del sistema operativo o servidor; una página web no puede. Child solo ofrece guía de pantallas y SOS. Se descarta salvo en la versión nativa.
+
+## 8. Qué sigue (orden propuesto)
+- Decisiones que dependen del autor sobre los capítulos 1 a 3: (a) el cap. 1 dice que no se recomienda el conteo rutinario de movimientos fetales como predictor único salvo riesgo; la app tiene la herramienta «Movimientos del bebé» (v0.10), que solo cuenta y pide consultar al equipo: decidir si se deja, se matiza o se quita; (b) el esquema de vacunación es el de EE. UU.: falta el calendario argentino oficial; (c) mandar la bibliografía numerada [1]… de cada capítulo y las figuras; (d) la calculadora HEADS-ED (y cualquier calculadora de la guía) choca con la regla de no cargar calculadoras: confirmar si se carga; (e) alinear los hitos de la pestaña Desarrollo y la sección Etapas con los textos de los capítulos 2 y 3.
+- Pedir al usuario que habilite argentina.gob.ar en la red del entorno (o que suba el PDF del calendario) para cargar el calendario de vacunación con fuente oficial. Seguir con las ⏳ de la sección 7 quater cuando haya texto.
+- Hasta la adolescencia: faltan curvas de crecimiento de 5 a 19 años (bajar tablas oficiales de la OMS, no de memoria), hitos y contenido clínico de 6 a 18 años (hoy solo etapas cualitativas en borrador), y los capítulos de la Guía para esas edades.
+- Preguntas: confirmar con el usuario cómo quiere que se responda (hoy el hermano responde por WhatsApp o correo y se pega la respuesta; no hay servidor). Si el hermano va a escribir el contenido de ese apartado, definir el formato.
+- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), modo niñera completo, fotos en el álbum (comprimidas, con límite de espacio), plan de parto como lista editable.
+- Cargar capítulos que el usuario entregue en `BODY[n]` (prioridad: 3, 6, 8, 9, 10 para cerrar la Parte I).
+- Calendario de vacunación de Argentina con la fuente oficial (no de memoria). Capítulo 16.
+- Calendario de controles (cap. 12) y salud bucal, visual y auditiva (19, 20) cuando haya texto.
+- Revisión médica: completar `REVIEW` y revisar todo lo marcado «pendiente».
+- Ilustraciones médicas propias (embrión y feto) con ilustrador o banco con licencia.
+- Versión nativa (notificaciones, widgets, cifrado real).
+
+## 9. Pendientes de revisión humana
+- Capítulos 1 a 3 entregados por el autor: cargados tal cual, con revisión médica pendiente.
+- Etapas de 6 a 18 años y recomendaciones de crianza por edad (v0.9), escritas como resumen general para la app: contrastar con AAP Bright Futures, HealthyChildren y OMS.
+- Lista de ideas del bolso de maternidad (v0.8): confirmar o ajustar según el criterio del equipo.
+- Todo el contenido clínico (umbrales de redatación ACOG, fórmula de CRL, cronología prenatal, hitos CDC/AAP 2022, pantallas, sueño, alertas, 42 semanas de embriología escritas de memoria sin libro de texto).
+- Números de emergencia de México, Chile, Uruguay, España y Colombia.
+- Figuras [11] a [15] del índice: falta el detalle de la fuente.
