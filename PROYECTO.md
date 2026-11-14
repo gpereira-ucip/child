@@ -123,3 +123,7 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 - Todo el contenido clínico (umbrales de redatación ACOG, fórmula de CRL, cronología prenatal, hitos CDC/AAP 2022, pantallas, sueño, alertas, 42 semanas de embriología escritas de memoria sin libro de texto).
 - Números de emergencia de México, Chile, Uruguay, España y Colombia.
 - Figuras [11] a [15] del índice: falta el detalle de la fuente.
+
+
+## Publicación (14/11/2026)
+- La dirección https://gpereira-ucip.github.io/child/ se publica desde la rama gh-pages. El workflow `.github/workflows/publicar.yml` copia main a gh-pages solo en cada push: no lo borres ni toques gh-pages a mano.
