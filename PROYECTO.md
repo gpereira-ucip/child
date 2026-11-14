@@ -127,3 +127,9 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 
 ## Publicación (14/11/2026)
 - La dirección https://gpereira-ucip.github.io/child/ se publica desde la rama gh-pages. El workflow `.github/workflows/publicar.yml` copia main a gh-pages solo en cada push: no lo borres ni toques gh-pages a mano.
+
+
+## Instalación en el teléfono (14/11/2026)
+- En la raíz están `manifest.json`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` y `sw.js`. Con ellos Android instala Child como app de verdad (antes quedaba como acceso directo con el logo de Chrome, porque el manifest se armaba en memoria). No los borres.
+- Servida por https, la app usa `manifest.json`; abierta como archivo local sigue usando el manifest embebido.
+- `sw.js` (raíz y src) no guarda caché a propósito: así siempre se ve la última versión.
