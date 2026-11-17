@@ -1,6 +1,6 @@
 # Child: documento maestro del proyecto (fuente única)
 
-Actualizado: 16 nov 2026 · Versión de la app: 0.22 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
+Actualizado: 17 nov 2026 · Versión de la app: 0.23 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
 
 > Cualquier sesión que trabaje en Child debe leer este archivo primero y actualizarlo al terminar. Las sesiones de Claude no comparten memoria: este documento es la memoria.
 
@@ -17,8 +17,9 @@ No es la app PICU Pocket / Arucip (ese es otro proyecto, para profesionales de t
 - **Poco texto en lo inicial**; el detalle va plegado.
 - Perfiles inclusivos: «Estamos esperando» / «Ya está con nosotros». No preguntar cómo llegó el niño; la fecha de nacimiento puede ser aproximada; la sección Embarazo es de consulta general. Tabla de curvas «niñas/niños» sin suponer nada.
 
-## 3. Estado de la app (v0.22)
+## 3. Estado de la app (v0.23)
 
+- v0.23 Registro > Red de apoyo (`regT="red"`, `vRed`, `redText`, `redTel`, campo `red` por niño en `CK`, ítems {id,n,r,t}; eventos `rdadd`, `rddel`, `rdcopy`): personas que ayudan (nombre, en qué ayuda, teléfono opcional con botón «Llamar» tel:), quitar con confirmación y copiar la lista. Sin contenido clínico; no avisa ni llama sola. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «red de apoyo» (tanda 4, F).
 - v0.22 Registro > Barriga (`regT="bar"`, `vBar`, `barText`, `barWk`, campo `bar` por niño en `CK`, ítems {id,d,m,n}; eventos `baadd`, `bardel`, `bacopy`): diario de la panza con fecha, un dato libre opcional y una nota; si hay FUM muestra la semana de ese día (misma cuenta que `curWeek`, de 0 a 41). Sin contenido clínico: la app no interpreta lo anotado ni da valores esperados. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «registro de la barriga» (tanda 4, B); sin fotos.
 - v0.21 Registro > Nombres (`regT="nom"`, `vNom`, `nomText`, campo `nom` por niño en `CK`, ítems {id,t,n,f}; eventos `nmadd`, `nmfav`, `nmdel`, `nmcopy`): lista de nombres posibles con nota y estrella de favorito (los favoritos van arriba), quitar y copiar la lista. Sin contenido clínico: la app no sugiere nombres. Probada en Chromium 390x844 sin errores de consola ni desborde; se guarda en localStorage. Cubre «nombres» (tanda 4, B).
 - v0.20 Registro > Cartas (`regT="car"`, `vCar`, `carText`, campo `car` por niño en `CK`, ítems {id,t,d,x}; eventos `cars`, `carn`, `care`, `carc`, `carh`, `carr`): cartas escritas por la familia para el niño o el bebé que viene, con título, fecha y texto de hasta 3000 caracteres; editar, copiar, compartir y quitar (con confirmación). Sin contenido clínico: la app no sugiere qué escribir. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «cartas al bebé» (tanda 4, B).
@@ -109,7 +110,7 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 - Pedir al usuario que habilite argentina.gob.ar en la red del entorno (o que suba el PDF del calendario) para cargar el calendario de vacunación con fuente oficial. Seguir con las ⏳ de la sección 7 quater cuando haya texto.
 - Hasta la adolescencia: las curvas de 5 a 19 años quedaron hechas en v0.18 (falta la revisión médica y decidir si se quiere un gráfico continuo de 0 a 19 años); faltan hitos y contenido clínico de 6 a 18 años (hoy solo etapas cualitativas en borrador), y los capítulos de la Guía para esas edades.
 - Preguntas: confirmar con el usuario cómo quiere que se responda (hoy el hermano responde por WhatsApp o correo y se pega la respuesta; no hay servidor). Si el hermano va a escribir el contenido de ese apartado, definir el formato.
-- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: registro de la barriga v0.22, cartas al bebé v0.20, lista de nombres v0.21, preguntas para mi equipo en el plan de parto v0.19, hoja para quien cuida / modo niñera v0.17, rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), fotos en el álbum (comprimidas, con límite de espacio).
+- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: red de apoyo v0.23, registro de la barriga v0.22, cartas al bebé v0.20, lista de nombres v0.21, preguntas para mi equipo en el plan de parto v0.19, hoja para quien cuida / modo niñera v0.17, rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), fotos en el álbum (comprimidas, con límite de espacio).
 - Cargar capítulos que el usuario entregue en `BODY[n]` (prioridad: 3, 6, 8, 9, 10 para cerrar la Parte I).
 - Calendario de vacunación de Argentina con la fuente oficial (no de memoria). Capítulo 16.
 - Calendario de controles (cap. 12) y salud bucal, visual y auditiva (19, 20) cuando haya texto.
