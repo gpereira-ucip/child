@@ -1,6 +1,6 @@
 # Child: documento maestro del proyecto (fuente única)
 
-Actualizado: 19 nov 2026 · Versión de la app: 0.24 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
+Actualizado: 20 nov 2026 · Versión de la app: 0.25 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
 
 > Cualquier sesión que trabaje en Child debe leer este archivo primero y actualizarlo al terminar. Las sesiones de Claude no comparten memoria: este documento es la memoria.
 
@@ -17,8 +17,9 @@ No es la app PICU Pocket / Arucip (ese es otro proyecto, para profesionales de t
 - **Poco texto en lo inicial**; el detalle va plegado.
 - Perfiles inclusivos: «Estamos esperando» / «Ya está con nosotros». No preguntar cómo llegó el niño; la fecha de nacimiento puede ser aproximada; la sección Embarazo es de consulta general. Tabla de curvas «niñas/niños» sin suponer nada.
 
-## 3. Estado de la app (v0.24)
+## 3. Estado de la app (v0.25)
 
+- v0.25 Registro > Ánimo (`regT="ani"`, `vAni`, `aniText`, campo `ani` por niño en `CK`, ítems {id,d,e,n}; eventos `anadd`, `andel`, `ancopy`): check-in emocional del cuidador con fecha, una palabra de una lista fija (Bien, Contento/a, Cansado/a, Abrumado/a, Ansioso/a, Triste, Enojado/a) y nota opcional; cuenta cuántas veces eligió cada una, quitar con confirmación y copiar la lista. No es un test ni una escala: no puntúa, no interpreta ni diagnostica; solo una línea general de «hablalo con alguien de confianza o un profesional». Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «check-in emocional» (tanda 4, I).
 - v0.24 Registro > Logros (`regT="lgr"`, `vLgr`, `lgrText`, campo `log2` por niño en `CK`, ítems {id,d,t,n}; eventos `lgadd`, `lgdel`, `lgcopy`): logros del cuidador con fecha, texto y nota opcional, quitar con confirmación y copiar la lista. Sin contenido clínico; la app no evalúa lo anotado. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «logros del cuidador» (tanda 4, I).
 - v0.23 Registro > Red de apoyo (`regT="red"`, `vRed`, `redText`, `redTel`, campo `red` por niño en `CK`, ítems {id,n,r,t}; eventos `rdadd`, `rddel`, `rdcopy`): personas que ayudan (nombre, en qué ayuda, teléfono opcional con botón «Llamar» tel:), quitar con confirmación y copiar la lista. Sin contenido clínico; no avisa ni llama sola. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «red de apoyo» (tanda 4, F).
 - v0.22 Registro > Barriga (`regT="bar"`, `vBar`, `barText`, `barWk`, campo `bar` por niño en `CK`, ítems {id,d,m,n}; eventos `baadd`, `bardel`, `bacopy`): diario de la panza con fecha, un dato libre opcional y una nota; si hay FUM muestra la semana de ese día (misma cuenta que `curWeek`, de 0 a 41). Sin contenido clínico: la app no interpreta lo anotado ni da valores esperados. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «registro de la barriga» (tanda 4, B); sin fotos.
@@ -111,7 +112,7 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 - Pedir al usuario que habilite argentina.gob.ar en la red del entorno (o que suba el PDF del calendario) para cargar el calendario de vacunación con fuente oficial. Seguir con las ⏳ de la sección 7 quater cuando haya texto.
 - Hasta la adolescencia: las curvas de 5 a 19 años quedaron hechas en v0.18 (falta la revisión médica y decidir si se quiere un gráfico continuo de 0 a 19 años); faltan hitos y contenido clínico de 6 a 18 años (hoy solo etapas cualitativas en borrador), y los capítulos de la Guía para esas edades.
 - Preguntas: confirmar con el usuario cómo quiere que se responda (hoy el hermano responde por WhatsApp o correo y se pega la respuesta; no hay servidor). Si el hermano va a escribir el contenido de ese apartado, definir el formato.
-- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: logros del cuidador v0.24, red de apoyo v0.23, registro de la barriga v0.22, cartas al bebé v0.20, lista de nombres v0.21, preguntas para mi equipo en el plan de parto v0.19, hoja para quien cuida / modo niñera v0.17, rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), fotos en el álbum (comprimidas, con límite de espacio).
+- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: check-in de ánimo v0.25, logros del cuidador v0.24, red de apoyo v0.23, registro de la barriga v0.22, cartas al bebé v0.20, lista de nombres v0.21, preguntas para mi equipo en el plan de parto v0.19, hoja para quien cuida / modo niñera v0.17, rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), fotos en el álbum (comprimidas, con límite de espacio).
 - Cargar capítulos que el usuario entregue en `BODY[n]` (prioridad: 3, 6, 8, 9, 10 para cerrar la Parte I).
 - Calendario de vacunación de Argentina con la fuente oficial (no de memoria). Capítulo 16.
 - Calendario de controles (cap. 12) y salud bucal, visual y auditiva (19, 20) cuando haya texto.
@@ -120,6 +121,7 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 - Versión nativa (notificaciones, widgets, cifrado real).
 
 ## 9. Pendientes de revisión humana
+- Ánimo (v0.25): revisar la lista de siete palabras y la línea final de acompañamiento (texto general, sin contenido clínico); decidir si se quiere algo más (p. ej. recursos de salud mental por país, que requerirían fuente oficial).
 - Curvas de 5 a 19 años (v0.18): revisar que la referencia OMS 2007 sea la que quiere usar el autor (en Argentina la SAP usa OMS hasta los 5 años y tiene tablas nacionales para algunas medidas: decisión del autor), el aviso «alguna medida está fuera del rango esperado» (se muestra con z mayor que 2 o menor que -2, igual que en 0 a 5 años) y el pequeño salto de la curva al pasar de una tabla a la otra a los 5 años (propio de las tablas).
 - Capítulos 1 a 3 entregados por el autor: cargados tal cual, con revisión médica pendiente.
 - Etapas de 6 a 18 años y recomendaciones de crianza por edad (v0.9), escritas como resumen general para la app: contrastar con AAP Bright Futures, HealthyChildren y OMS.
