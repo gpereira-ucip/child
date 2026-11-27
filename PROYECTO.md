@@ -1,6 +1,6 @@
 # Child: documento maestro del proyecto (fuente única)
 
-Actualizado: 27 nov 2026 · Versión de la app: 0.32 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
+Actualizado: 27 nov 2026 · Versión de la app: 0.33 · Autor del proyecto: Gonzalo Gabriel Pereira (pediatra e intensivista pediátrico)
 
 > Cualquier sesión que trabaje en Child debe leer este archivo primero y actualizarlo al terminar. Las sesiones de Claude no comparten memoria: este documento es la memoria.
 
@@ -17,8 +17,9 @@ No es la app PICU Pocket / Arucip (ese es otro proyecto, para profesionales de t
 - **Poco texto en lo inicial**; el detalle va plegado.
 - Perfiles inclusivos: «Estamos esperando» / «Ya está con nosotros». No preguntar cómo llegó el niño; la fecha de nacimiento puede ser aproximada; la sección Embarazo es de consulta general. Tabla de curvas «niñas/niños» sin suponer nada.
 
-## 3. Estado de la app (v0.32)
+## 3. Estado de la app (v0.33)
 
+- v0.33 Línea de tiempo (`ltItems`, `LT_T`): suma las anotaciones de Registro > Cole (`S.sec`, tipo `sec`; el título es el texto y la nota es el tipo de anotación), con su chip de filtro «Cole». Sigue siendo solo lectura y sin contenido clínico. Probada en Chromium 390x844 sin errores de consola ni desborde.
 - v0.32 Registro > Cole (`regT="sec"`, `vSec`, `secText`, `SEC_T`, campo `sec` por niño en `CK`, ítems {id,d,k,t}; eventos `seadd`, `sedel`, `secopy`): seguimiento escolar con fecha, tipo (reunión, tarea o entrega, aviso de la escuela, algo que contó, otro) y texto; más nuevos primero, quitar con confirmación y copiar. Sin contenido clínico; no avisa, no evalúa ni se comparte. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste. Cubre «seguimiento escolar» (tanda 4, D).
 - v0.31 Registro > Escuela (`regT="esc"`, `vEsc`, `escO`, `escText`, campo `esc` por niño en `CK`, objeto {f:{e,g,d,h,o}, a:[{id,n,r}]}; eventos `essave`, `esadd`, `esdel`, `escopy`): tarjeta del jardín o la escuela (nombre, sala o grado, docente o contacto, horario, otro dato) y lista de personas autorizadas a retirar al niño (nombre y vínculo); quitar con confirmación y copiar la tarjeta. Sin contenido clínico; no avisa ni se comparte. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «tarjeta escolar» (tanda 4, H).
 - v0.30 Registro > Plan familiar (`regT="pf"`, `vPf`, `pfText`, `PF_T`, campo `pf` por niño en `CK`, ítems {id,k,t}; eventos `pfadd`, `pfdel`, `pfcopy`): acuerdos de la familia escritos por el usuario (punto de encuentro, persona a quien avisar, dónde están los papeles y el botiquín, otro), quitar con confirmación y copiar. Sin contenido clínico ni indicaciones; no avisa ni se comparte. Probada en Chromium 390x844 sin errores de consola ni desborde; persiste al recargar. Cubre «plan de desastres» en versión mínima (tanda 4, H).
@@ -120,7 +121,7 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 - Pedir al usuario que habilite argentina.gob.ar en la red del entorno (o que suba el PDF del calendario) para cargar el calendario de vacunación con fuente oficial. Seguir con las ⏳ de la sección 7 quater cuando haya texto.
 - Hasta la adolescencia: las curvas de 5 a 19 años quedaron hechas en v0.18 (falta la revisión médica y decidir si se quiere un gráfico continuo de 0 a 19 años); faltan hitos y contenido clínico de 6 a 18 años (hoy solo etapas cualitativas en borrador), y los capítulos de la Guía para esas edades.
 - Preguntas: confirmar con el usuario cómo quiere que se responda (hoy el hermano responde por WhatsApp o correo y se pega la respuesta; no hay servidor). Si el hermano va a escribir el contenido de ese apartado, definir el formato.
-- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: seguimiento escolar v0.32, tarjeta de escuela v0.31, plan familiar v0.30, día libre v0.28 (en la línea de tiempo desde v0.29), línea de tiempo familiar v0.27, cuaderno entre cuidadores v0.26, check-in de ánimo v0.25, logros del cuidador v0.24, red de apoyo v0.23, registro de la barriga v0.22, cartas al bebé v0.20, lista de nombres v0.21, preguntas para mi equipo en el plan de parto v0.19, hoja para quien cuida / modo niñera v0.17, rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), fotos en el álbum (comprimidas, con límite de espacio).
+- Ideas acotadas para próximas corridas sin contenido clínico (de la comparación 7 ter; ya hechos: Cole en la línea de tiempo v0.33, seguimiento escolar v0.32, tarjeta de escuela v0.31, plan familiar v0.30, día libre v0.28 (en la línea de tiempo desde v0.29), línea de tiempo familiar v0.27, cuaderno entre cuidadores v0.26, check-in de ánimo v0.25, logros del cuidador v0.24, red de apoyo v0.23, registro de la barriga v0.22, cartas al bebé v0.20, lista de nombres v0.21, preguntas para mi equipo en el plan de parto v0.19, hoja para quien cuida / modo niñera v0.17, rutina del día v0.16, turnos de cuidado v0.15, cronómetro de lactancia v0.10, gastos médicos v0.12, tareas y lista de compras v0.13, línea de tiempo del álbum en el resumen v0.14): pictogramas para la rutina (necesitan ilustraciones con licencia), fotos en el álbum (comprimidas, con límite de espacio).
 - Cargar capítulos que el usuario entregue en `BODY[n]` (prioridad: 3, 6, 8, 9, 10 para cerrar la Parte I).
 - Calendario de vacunación de Argentina con la fuente oficial (no de memoria). Capítulo 16.
 - Calendario de controles (cap. 12) y salud bucal, visual y auditiva (19, 20) cuando haya texto.
@@ -129,7 +130,7 @@ Basada en un resumen que pegó el usuario (no verificado una por una). Lo que se
 - Versión nativa (notificaciones, widgets, cifrado real).
 
 ## 9. Pendientes de revisión humana
-- Cole (v0.32): revisar el texto de presentación y los cinco tipos (general, sin contenido clínico). No se sumó a la Línea de tiempo; decidir si se quiere.
+- Cole (v0.32/v0.33): revisar el texto de presentación y los cinco tipos (general, sin contenido clínico). En v0.33 se sumó a la Línea de tiempo (decisión de la corrida, por ser lo menos personal); confirmar si se prefiere así.
 - Escuela (v0.31): revisar el texto de presentación (general, sin contenido clínico). La tarjeta no incluye alergias ni medicación a propósito (ya están en Ficha y en Quien cuida); decidir si se quiere sumarlas.
 - Plan familiar (v0.30): revisar el texto de presentación y los cinco tipos (general, sin contenido clínico); la app no sugiere qué hacer en un desastre. Una guía de qué hacer en emergencias necesitaría fuente oficial.
 - Día libre (v0.28/v0.29): revisar el texto de presentación (general, sin contenido clínico); en v0.29 se sumó a la Línea de tiempo solo con los planes ya pasados (decisión tomada por la corrida: lo vivido, no lo planeado); confirmar si se prefiere así.
